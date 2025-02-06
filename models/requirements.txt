@@ -1,0 +1,21 @@
+# PyTorch (choose the correct version based on your CUDA or CPU setup)
+torch>=1.10.0
+
+# Transformers with PyTorch support and latest version (ensure accelerate is included)
+transformers[torch]>=4.26.0
+
+# Accelerate for distributed training support (needed by Trainer)
+accelerate>=0.26.0
+
+# Hugging Face Datasets for data processing
+datasets>=2.10.0
+
+# Evaluate for metrics
+evaluate>=0.3.0
+
+# scikit-learn for clustering and regression (use the full package name)
+scikit-learn>=1.0.2
+
+# Pandas and NumPy for data manipulation
+pandas>=1.3.0
+numpy>=1.21.0
