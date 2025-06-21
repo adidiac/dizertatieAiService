@@ -5,10 +5,12 @@ from .base_extractor import BaseExtractor
 
 class PromptExtractor(BaseExtractor):
     def __init__(self):
+        # Require the API key
         self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OPENAI_API_KEY environment variable not set")
-        openai.api_key = self.api_key
+        # Instantiate the v1 client
+        self.client = openai.OpenAI(api_key=self.api_key)
 
     def _generate_prompt(self, text: str) -> str:
         return f"""
@@ -28,22 +30,30 @@ Respond with a JSON object in the following format:
     def extract(self, text: str) -> dict:
         prompt = self._generate_prompt(text)
         try:
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",  # or use another available model
+            resp = self.client.chat.completions.create(
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are an expert in psychometrics."},
-                    {"role": "user", "content": prompt}
+                    {"role": "user",   "content": prompt}
                 ],
                 temperature=0.3,
                 max_tokens=150,
             )
-            # Get the message content from the response
-            output_text = response["choices"][0]["message"]["content"].strip()
-            # Try to extract the JSON from the output text
-            json_start = output_text.find("{")
-            json_end = output_text.rfind("}") + 1
-            json_str = output_text[json_start:json_end]
-            scores = json.loads(json_str)
+            # Use attribute access for the v1 response object
+            content = resp.choices[0].message.content.strip()
+            start = content.find("{")
+            end   = content.rfind("}") + 1
+            return json.loads(content[start:end])
+
         except Exception as e:
-            scores = {"error": "Failed to parse prompt response", "details": str(e)}
+            scores = {
+                "awareness": 0,
+                "conscientiousness": 0,
+                "stress": 0,
+                "neuroticism": 0,
+                "risk_tolerance": 0
+            }
+            print(f"Error during OpenAI API call: {e}")
         return scores
+
+
