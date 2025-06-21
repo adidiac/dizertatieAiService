@@ -91,15 +91,3 @@ Această soluție modulară și integrată este fundamentată pe principii și t
 3. **Bishop, C. M. (2006).** Pattern Recognition and Machine Learning. Springer.
 4. **Stajano, F., & Wilson, P. (2006).** Cyber Security: A Matter of Trust. *IEEE Security & Privacy*.
 5. Diverse studii în psihologia organizațională privind influența factorilor psihologici (conștiinciozitate, neuroticism, etc.) asupra comportamentului în mediile de risc.
-
----
-
-## 7. State of the Art
-
-https://arxiv.org/abs/2403.07581
-
-https://huggingface.co/Minej/bert-base-personality#:~:text=Extroversion%3A%20A%20value%20between%200,representing%20the%20predicted%20openness%20trait
-
-https://www.sciencedirect.com/science/article/abs/pii/S0191886916308418#:~:text=analysis%20www,negative%20emotion%20words%20and
-
-https://arxiv.org/html/2407.05943v1#:~:text=%E2%80%9Ctraits%E2%80%9D%20considered%20in%20the%20literature,others%20belong%20to%20the%20agreeableness
